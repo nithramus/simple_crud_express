@@ -1,0 +1,21 @@
+{
+  "name": "express-crud",
+  "version": "0.0.1",
+  "description": "Simple Crud on top of express framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CRUD",
+    "express",
+    "node",
+    "nodejs",
+    "simple"
+  ],
+  "author": "nithramir",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
