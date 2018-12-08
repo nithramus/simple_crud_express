@@ -11,7 +11,7 @@ class Crud {
         this.listParams = listParams;
         this.adminRules = adminRules;
         this.router = express.Router();
-        this.crudModel = new crudModel(knex);   
+        this.crudModel = new crudModel(knex, road);   
     }
 
     setRoad() {
