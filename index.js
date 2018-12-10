@@ -1,3 +1,3 @@
-const crud_router = require('./src/crud.js')
+const crudClass = require('./src/crud_service.js')
 
-module.exports = 
+module.exports = crudClass
