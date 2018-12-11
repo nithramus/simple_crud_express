@@ -4,14 +4,13 @@ const verifUtils = require('./verification_utils');
 
 
 class Crud {
-    constructor(knexConfig, road, listRoads, listParams, adminRules, accessRules, middleWares) {
+    constructor(knexConfig, road, listRoads, listParams, adminRules, accessRules) {
         this.knex = knexConfig;
         this.road = road;
         this.listRoads = listRoads;
         this.accessRules = accessRules;
         this.listParams = listParams;
         this.adminRules = adminRules;
-        this.middleWares = middleWares;
         this.router = express.Router();
         this.crudModel = new crudModel(knexConfig, road);   
         this.setRoad();
@@ -37,13 +36,10 @@ class Crud {
     }
 
     async addItem(req, res) {
-        let itemParams = verifUtils.verifParameters(req.body, this.listParams);
+        const itemParams = verifUtils.verifParameters(req.body, this.listParams);
         this.listRoads.forEach(road => {
             itemParams[`${road}_id`] = req.params[`${road}Id`];
-        });
-        if (this.middleWares.add) {
-            itemParams = this.middleWares.add(req, res, itemParams);
-        }
+        })
         const itemId = await this.crudModel.addItem(itemParams);
         const item = await this.crudModel.getItem({ id: itemId });
         await this.renderResponse(item, res);

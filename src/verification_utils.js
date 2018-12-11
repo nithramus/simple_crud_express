@@ -70,6 +70,7 @@ const VerificationUtils = class VerificationUtils {
 const verificationObjects = [
     { type: 'number', verif: VerificationUtils.verifNumber },
     { type: 'string', verif: VerificationUtils.verifString },
+    { type: 'function', verif: VerificationUtils.customFunction },
 ]
 
 module.exports = VerificationUtils;

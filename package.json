@@ -1,5 +1,5 @@
 {
-  "name": "express-crud",
+  "name": "simple_crud_express",
   "version": "0.0.1",
   "description": "Simple Crud on top of express framework",
   "main": "index.js",

@@ -29,12 +29,20 @@ class CrudModel {
         }
     }
 
-    async updateItem(whereParams, updateParams) {
+    async getItems(whereParams, linkedTable) {
         try {
-            console.log({updateParams}, {whereParams});
-            await this.knex(this.table)
-                .where(whereParams)
-                .update(updateParams);
+            const request = this.knex(this.table)
+            if (linkedTable) {
+                const obj ={};
+                obj[`${linkedTable.valueName}`] = linkedTable.value
+                request.innerJoin(linkedTable.table, linkedTable.road_item_name, linkedTable.table_item_name)
+                .where(obj)
+            }
+            else {
+                request.where(whereParams);
+            }
+            const items = await request;
+            return items;
         }
         catch (err) {
             console.log(err);
@@ -42,11 +50,12 @@ class CrudModel {
         }
     }
 
-    async getItems(whereParams) {
+    async updateItem(whereParams, updateParams) {
         try {
-            const items = await this.knex(this.table)
-                .where(whereParams);
-            return items;
+            console.log({updateParams}, {whereParams});
+            await this.knex(this.table)
+                .where(whereParams)
+                .update(updateParams);
         }
         catch (err) {
             console.log(err);
